@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="width_user">350dp</dimen>
+    <dimen name="height">60dp</dimen>
+    <dimen name="width_buttonlogin">300dp</dimen>
+    <dimen name="paddingLeft">10dp</dimen>
+    <dimen name="conner">70dp</dimen>
 
 </resources>
