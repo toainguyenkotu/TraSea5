@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "524879005791",
+    "firebase_url": "https://traseapp.firebaseio.com",
+    "project_id": "traseapp",
+    "storage_bucket": "traseapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524879005791:android:30189711d161e2895c33ea",
+        "android_client_info": {
+          "package_name": "com.example.trasea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524879005791-puq78rqkv584pi5hgdoa0j58o9upf2np.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trasea",
+            "certificate_hash": "de20cb88a6e3f929a250f7e43dd676ee84250ef3"
+          }
+        },
+        {
+          "client_id": "524879005791-l1hijhnl6b2fuoalka54a7qcaqt3hnh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk2K86EVOmFSbE2nrDg2prmxJUAlgbATc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524879005791-l1hijhnl6b2fuoalka54a7qcaqt3hnh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

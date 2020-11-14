@@ -6,9 +6,11 @@
     <string name="facebook">Continue with Facebook</string>
     <string name="gmail">Continue with Gmail</string>
     <string name="signUp">Sign up?</string>
-    <string name="newCreate">New Create</string>
+    <string name="newCreate">New Account</string>
     <string name="facebook_app_id">866853430718782</string>
     <string name="fb_login_protocol_scheme">fb866853430718782</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

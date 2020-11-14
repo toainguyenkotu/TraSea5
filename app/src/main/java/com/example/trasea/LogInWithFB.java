@@ -3,6 +3,7 @@ package com.example.trasea;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -39,12 +40,12 @@ public class LogInWithFB {
 
                     @Override
                     public void onCancel() {
-                        // App code
+                        Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        // App code
+                        Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
