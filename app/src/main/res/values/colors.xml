@@ -8,9 +8,10 @@
     <color name="black">#000000</color>
     <color name="purple">#ba53de</color>
     <color name="pink">#f469a9</color>
-    <color name="blue">#88bef5</color>
+    <color name="blue">#1C82EA</color>
     <color name="blueSky">#64BCE4</color>
     <color name="grey">#4E5E65</color>
     <color name="facebook">#095FF4</color>
     <color name="gmail">#E11504</color>
+    <color name="white_yellow">#D0F6F2CB</color>
 </resources>

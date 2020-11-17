@@ -1,26 +1,25 @@
 package com.example.trasea.adapter;
 
-import android.app.Notification;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.trasea.fragments.AddFrag;
+import com.example.trasea.fragments.FragmentStorageImagePost;
+import com.example.trasea.fragments.FragmentStorageImageTag;
 import com.example.trasea.fragments.HomeFrag;
 import com.example.trasea.fragments.NotificationFrag;
 import com.example.trasea.fragments.ProfileFrag;
 import com.example.trasea.fragments.SearchFrag;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerStorageImageAdapter extends FragmentStatePagerAdapter {
 
     int noOfTabs;
 
-    public ViewPagerAdapter(@NonNull FragmentManager fm, int noOfTabs) {
+    public ViewPagerStorageImageAdapter(@NonNull FragmentManager fm, int noOfTabs) {
         super(fm);
-        this.noOfTabs = noOfTabs;
+        this.noOfTabs =noOfTabs;
     }
 
     @NonNull
@@ -29,23 +28,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
 
             case 0:
-                return new HomeFrag();
+                return new FragmentStorageImagePost();
 
             case 1:
-                return new SearchFrag();
-
-
-            case 2:
-                return new AddFrag();
-
-
-            case 3:
-                return new NotificationFrag();
-
-
-            case 4:
-                return new ProfileFrag();
-
+                return new FragmentStorageImageTag();
 
             default:
                 return null;

@@ -10,47 +10,11 @@
     android:background="@color/white"
     tools:context=".MainActivity">
     
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/story_toolbar"
-        android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
-        android:elevation="2dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetEnd="0dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/app_name"
-                android:layout_centerVertical="true"
-                android:textStyle="bold"
-                android:textSize="@dimen/constanSize20"
-                android:textColor="@color/black"/>
-
-            <ImageView
-                android:id="@+id/iv_send"
-                android:layout_width="64dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_send"
-                />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/story_toolbar"
         android:layout_above="@id/tab_story"
         android:id="@+id/vp_story"/>
 

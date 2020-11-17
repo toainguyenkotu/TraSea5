@@ -6,13 +6,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.example.trasea.adapter.ViewPagerAdapter;
+import com.example.trasea.adapter.ViewPagerHomeAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+    ViewPagerHomeAdapter viewPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Toolbar toolbar = findViewById(R.id.story_toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.story_toolbar);
+//        setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.vp_story);
         tabLayout = findViewById(R.id.tab_story);
     }
@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        //lien ket viewPager voi tabLayout
+        viewPagerAdapter = new ViewPagerHomeAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(viewPagerAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

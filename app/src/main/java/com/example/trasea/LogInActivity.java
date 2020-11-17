@@ -1,5 +1,6 @@
 package com.example.trasea;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,7 +42,6 @@ import java.util.regex.Pattern;
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
     private static final Pattern PASS_WORD =  Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z]).{6,16}");
     ActivityLoginBinding binding;
-    LogInWithFB logInWithFB;
     CallbackManager callbackManager;
     private FirebaseAuth mAuth;
     TextView tv_email_alert,tv_password_alert;
@@ -64,9 +64,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         binding.btnGmail.setOnClickListener(this);
         binding.tvSignUp.setOnClickListener(this);
 
-        logInWithFB = new LogInWithFB(this, callbackManager);
 
-        logInWithFB.registerSignInFBClient();
+        registerSignInFBClient();
 
     }
 
@@ -82,13 +81,14 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-        try {
-            callbackManager.onActivityResult(requestCode, resultCode, data);
-        }catch (Exception o){
-            // Hạn chế crash khi ko login đc hay back lại login page
-            // Do nothing
-        }
+//        try {
+//            callbackManager.onActivityResult(requestCode, resultCode, data);
+//        }catch (Exception o){
+//            // Hạn chế crash khi ko login đc hay back lại login page
+//            // Do nothing
+//        }
 
     }
 
@@ -99,10 +99,12 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 showDialog_signUp();
                 break;
             case R.id.btnLogIn:
-                handleSignIn();
+                String email = binding.txtUser.getText().toString().trim();
+                String password = binding.txtPassword.getText().toString().trim();
+                handleSignIn(email, password);
                 break;
             case R.id.btnFacebook:
-                logInWithFB.signInWithFB();
+                signInWithFB();
                 break;
             case R.id.btnGmail:
 
@@ -111,9 +113,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void handleSignIn() {
-        String email = binding.txtUser.getText().toString().trim();
-        String password = binding.txtPassword.getText().toString().trim();
+    private void handleSignIn(String email, String password) {
         if(checkEmailValidForSignIn(email) == true && checkPassValidForSignIn(password) == true){
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -121,8 +121,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(LogInActivity.this,MainActivity.class);
-                                startActivity(intent);
+                                gotoMainActivity();
                                 //updateUI(user);
                             } else {
                                 Toast.makeText(LogInActivity.this, "Please Check Your Information",
@@ -136,7 +135,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(LogInActivity.this, "Please Check Your Information",
                     Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void showDialog_signUp(){
@@ -162,22 +160,78 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                     /// do something?
                 }
 
+//                dialog.dismiss();
 
             }
         });
 
+
+
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog.show();
+    }
+
+    public void registerSignInFBClient(){
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        getFacebookAccountInfo(loginResult.getAccessToken());
+                        Log.d("AAA", "success");
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d("AAA", "cancel");
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Log.d("AAA", "error");
+
+                    }
+                });
+    }
+
+    public void getFacebookAccountInfo(AccessToken accessToken){
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String name = object.getString("name");
+                    //
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Bundle param = new Bundle();
+        param.putString("fields", "id,name,email,picture.width(200)");
+        request.setParameters(param);
+        request.executeAsync();
+    }
+
+    public void signInWithFB(){
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
     }
 
     public void updateUIWithFBAccount() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
         if (isLoggedIn) {
-            logInWithFB.getFacebookAccountInfo(accessToken);
+            getFacebookAccountInfo(accessToken);
+            gotoMainActivity();
         } else {
             //
         }
+    }
+
+    public void gotoMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public boolean checkEmailValid(String email){
@@ -232,8 +286,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LogInActivity.this, "Sign Up Success", Toast.LENGTH_SHORT).show();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LogInActivity.this,MainActivity.class);
-                            startActivity(intent);
+                            gotoMainActivity();
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

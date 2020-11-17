@@ -9,6 +9,9 @@
     <dimen name="x2constanSize20">40dp</dimen>
     <dimen name="constanSize5">5dp</dimen>
     <dimen name="constantSize70">70dp</dimen>
+    <dimen name="constant180">180dp</dimen>
+    <dimen name="constant10">10dp</dimen>
+    <dimen name="constant150">150</dimen>
 
     <dimen name="avatarSize">60dp</dimen>
 </resources>
