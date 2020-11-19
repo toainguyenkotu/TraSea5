@@ -6,7 +6,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.example.trasea"
+        applicationId "com.example.TraSeApp"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -44,6 +44,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-database'
 
 
 

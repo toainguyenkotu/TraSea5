@@ -42,6 +42,7 @@
     </androidx.appcompat.widget.Toolbar>
     
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/story_toolbar"
         android:id="@+id/rv_posts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
