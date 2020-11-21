@@ -91,8 +91,8 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_stogeimage));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_listcontact));
 
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         //lien ket viewPager
         viewPagerAdapter = new ViewPagerStorageImageAdapter(getChildFragmentManager(), tabLayout.getTabCount());

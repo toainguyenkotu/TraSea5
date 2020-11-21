@@ -22,7 +22,7 @@
         android:id="@+id/tab_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue"
+        android:background="#E4E2E2"
         app:tabIndicatorAnimationDuration="@android:integer/config_mediumAnimTime"
         android:layout_alignParentBottom="true" />
 
