@@ -44,7 +44,7 @@ public class ProfileStorageAdapter extends RecyclerView.Adapter<ProfileStorageAd
         }
 
         public void bind(Post post) {
-            binding.ivStorageImage.setImageResource(post.getImgPost());
+            binding.ivStorageImage.setImageResource(Integer.parseInt(post.getPostimage()));
         }
     }
 }

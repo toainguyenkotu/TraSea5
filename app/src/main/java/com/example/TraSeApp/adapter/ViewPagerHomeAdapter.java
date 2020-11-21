@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.example.TraSeApp.PostActivity;
 import com.example.TraSeApp.fragments.AddFrag;
 import com.example.TraSeApp.fragments.HomeFrag;
 import com.example.TraSeApp.fragments.NotificationFrag;
 import com.example.TraSeApp.fragments.ProfileFrag;
 import com.example.TraSeApp.fragments.SearchFrag;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class ViewPagerHomeAdapter extends FragmentStatePagerAdapter {
 

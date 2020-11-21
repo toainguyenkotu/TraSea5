@@ -17,15 +17,15 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_search_32x32" />
+            android:src="@drawable/ic_search_36x36" />
 
         <EditText
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:background="@android:color/transparent"
+            android:padding="7dp"
+            android:background="@drawable/edt_search_background"
             android:hint="Search" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -34,8 +34,8 @@
         android:id="@+id/rv_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/story_toolbar" />
-
+        android:layout_below="@id/story_toolbar"
+        android:layout_marginTop="7dp" />
 
 
 </RelativeLayout>

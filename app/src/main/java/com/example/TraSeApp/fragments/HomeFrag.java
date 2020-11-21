@@ -13,16 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.TraSeApp.R;
-import com.example.TraSeApp.adapter.HomeAdapter;
+import com.example.TraSeApp.adapter.PostAdapter;
 import com.example.TraSeApp.model.Post;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 
 public class HomeFrag extends Fragment {
+
     private RecyclerView rv_posts;
     private List<Post> list;
-    HomeAdapter homeAdapter;
+    private List<String> followingList;
+    PostAdapter postAdapter;
 
 
     public HomeFrag() {
@@ -42,23 +51,73 @@ public class HomeFrag extends Fragment {
 
         initView(view);
 
-        list = new ArrayList<>();
-        create_test_data();
 
-        homeAdapter = new HomeAdapter(list,getContext());
-        rv_posts.setAdapter(homeAdapter);
     }
 
-    private void create_test_data() {
-        for(int i = 0 ; i < 10 ; i++){
-            Post post = new Post("User "+i , i+" minutes","ID "+i,R.drawable.img_post_test,R.drawable.tokuda,i,i);
-            list.add(post);
-        }
-    }
 
     private void initView(View view) {
+
         rv_posts = view.findViewById(R.id.rv_posts);
         rv_posts.setHasFixedSize(true);
+
         rv_posts.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        list = new ArrayList<>();
+
+        postAdapter = new PostAdapter(getContext(), list);
+        rv_posts.setAdapter(postAdapter);
+
+        checkFollowingList();
+
+    }
+
+    private void checkFollowingList() {
+        followingList = new ArrayList<>();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("following");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                followingList.clear();
+                for (DataSnapshot s : snapshot.getChildren()) {
+                    followingList.add(s.getKey());
+                }
+                readPostFromFirebase();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    private void readPostFromFirebase() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Post post = snapshot.getValue(Post.class);
+                    for (String id : followingList) {
+                        if (post.getPublisher().equals(id)) {
+                            list.add(post);
+                        }
+                    }
+                }
+                postAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
