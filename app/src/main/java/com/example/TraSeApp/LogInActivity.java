@@ -68,24 +68,13 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
         binding.btnLogIn.setOnClickListener(this);
-        binding.btnFacebook.setOnClickListener(this);
-        binding.btnGmail.setOnClickListener(this);
         binding.tvSignUp.setOnClickListener(this);
 
 
-        registerSignInFBClient();
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        // Check if user is signed in (non-null)
-        FirebaseUser currentUser = auth.getCurrentUser();
-        updateUIWithFBAccount();
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -111,15 +100,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogIn:
                 handleSignIn();
                 break;
-
-            case R.id.btnFacebook:
-                signInWithFB();
-                break;
-
-            case R.id.btnGmail:
-
-                break;
-
         }
     }
 
@@ -174,68 +154,5 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
-    public void registerSignInFBClient() {
-        callbackManager = CallbackManager.Factory.create();
-
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        getFacebookAccountInfo(loginResult.getAccessToken());
-                        Log.d("AAA", "success");
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Log.d("AAA", "cancel");
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        Log.d("AAA", "error");
-
-                    }
-                });
-    }
-
-    public void getFacebookAccountInfo(AccessToken accessToken) {
-        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    String name = object.getString("name");
-                    //
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Bundle param = new Bundle();
-        param.putString("fields", "id,name,email,picture.width(200)");
-        request.setParameters(param);
-        request.executeAsync();
-    }
-
-    public void signInWithFB() {
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
-    }
-
-    public void updateUIWithFBAccount() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        if (isLoggedIn) {
-            getFacebookAccountInfo(accessToken);
-            gotoMainActivity();
-        } else {
-            //
-        }
-    }
-
-    public void gotoMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 
 }

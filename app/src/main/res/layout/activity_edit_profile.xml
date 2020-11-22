@@ -6,7 +6,31 @@
     android:orientation="vertical"
     android:id="@+id/ln_edit_profile">
 
-    <include layout="@layout/header_edit_profile"/>
+    <androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/iv_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_x" />
+
+        <TextView
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x4ConstantSize15"
+            android:text="Edit Profile" />
+
+        <ImageView
+            android:id="@+id/iv_tick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:src="@drawable/icon_tick" />
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +43,9 @@
         android:layout_width="@dimen/avatarSize"
         android:layout_height="@dimen/avatarSize"
         android:src="@drawable/tokuda"
-        android:id="@+id/iv_AvaProfile"/>
+        android:id="@+id/iv_AvaEdit"/>
     <TextView
+        android:id="@+id/tv_changeAva"
         android:layout_marginTop="@dimen/constanSize5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"/>
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtName"/>
@@ -53,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"/>
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtUserName"/>
@@ -62,47 +87,13 @@
             android:layout_marginTop="@dimen/constanSize5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Website"/>
+            android:text="Bio"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtLinkWeb"/>
-
-        <TextView
-            android:layout_marginTop="@dimen/constanSize5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bio"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/txtBio"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="@dimen/constanSize15"
-        android:layout_marginRight="@dimen/constant10"
-        android:layout_marginLeft="@dimen/constant10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_marginTop="@dimen/constanSize5"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/constanSize20"
-            android:layout_height="wrap_content"
-            android:text="@string/switchTo"
-            android:textColor="@color/blue"/>
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/constanSize15"
-            android:text="@string/infoPersontal"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/constanSize20" />
 
     </LinearLayout>
+
 
 </LinearLayout>

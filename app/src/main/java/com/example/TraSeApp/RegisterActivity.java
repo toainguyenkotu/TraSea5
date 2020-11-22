@@ -73,15 +73,15 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = auth.getCurrentUser();
-                            String userid = firebaseUser.getUid();
+                            String userId = firebaseUser.getUid();
 
-                            reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+                            reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
                             HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("id",userid);
+                            hashMap.put("id",userId);
                             hashMap.put("username",username.toLowerCase());
                             hashMap.put("fullname",fullname);
-                            hashMap.put("imgUrl","https://firebasestorage.googleapis.com/v0/b/traseapp-553c3.appspot.com/o/ironman.png?alt=media&token=25f1a566-f92c-4425-8966-59a53aa2a00d");
+                            hashMap.put("imgUrl","https://firebasestorage.googleapis.com/v0/b/traseapp-553c3.appspot.com/o/153179.png?alt=media&token=a40be939-4d07-4531-a86c-2567f0610acf");
                             hashMap.put("bio","");
 
                             // Quăng dữ liệu lên firebase
@@ -111,5 +111,11 @@ public class RegisterActivity extends AppCompatActivity {
         txtFullName = findViewById(R.id.txtFullName);
         txtPassword = findViewById(R.id.txtPassword);
         tv_alert = findViewById(R.id.tv_alert);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

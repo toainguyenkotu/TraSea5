@@ -130,7 +130,6 @@ public class SearchFrag extends Fragment {
                     users.clear();
                     for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                         User user = snapshot.getValue(User.class);
-
                         users.add(user);
                     }
                     userAdapter.notifyDataSetChanged();
@@ -144,6 +143,4 @@ public class SearchFrag extends Fragment {
         });
 
     }
-
-
 }

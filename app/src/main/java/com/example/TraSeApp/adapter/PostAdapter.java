@@ -1,6 +1,7 @@
 package com.example.TraSeApp.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.TraSeApp.R;
+import com.example.TraSeApp.fragments.ProfileFrag;
 import com.example.TraSeApp.model.Post;
 import com.example.TraSeApp.model.User;
+import com.facebook.share.Share;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +59,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         final Post post = mPost.get(position);
 
         Glide.with(mContext.getApplicationContext())
-                .load(post.getPostimage())
+                    .load(post.getPostimage())
                 .timeout(5000)
                 .placeholder(R.drawable.ic_person_64x64)
                 .into(holder.iv_post);
@@ -70,6 +74,41 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         getPublisherInfo(holder.avt, holder.tv_username, post.getPublisher()); // Get avt, get username, get id publisher
         isLiked(post.getPostid(), holder.img_btn_like);
         nrLikes(holder.tv_like_counter, post.getPostid());
+
+        holder.avt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("caches", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", post.getPublisher());
+                editor.apply();
+
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFrag()).commit();
+            }
+        });
+
+        holder.iv_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("caches", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", post.getPublisher());
+                editor.apply();
+
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFrag()).commit();
+            }
+        });
+
+        holder.tv_username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("caches", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", post.getPublisher());
+                editor.apply();
+
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFrag()).commit();
+            }
+        });
+
+
 
         holder.img_btn_like.setOnClickListener(new View.OnClickListener() {
             @Override
